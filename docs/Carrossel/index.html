@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <title>Carrossel de READMEs</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <style>
-      body { font-family: sans-serif; margin: 0; padding: 0; }
-      .swiper-slide { padding: 20px; background: #f5f5f5; overflow-y: auto; height: 90vh; }
-      .markdown-body { max-width: 800px; margin: auto; }
-      </style>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Carrossel de READMEs</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-slide {
+      padding: 20px;
+      background: #f5f5f5;
+      overflow-y: auto;
+      height: 90vh;
+    }
+
+    .markdown-body {
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
   <!-- https://dalton-reis.github.io/TCC/Carrossel/ -->>
   <!-- Mais "bonito" ... nesse código ou no próprio md do Git do TCC -->
-  
+
   <!-- Swiper Container -->
   <div class="swiper">
     <div class="swiper-wrapper" id="carousel">
@@ -29,21 +45,16 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     const files = [
-      'readme1.md', 
-      'https://raw.githubusercontent.com/gcgfurb/tcc_RafaelDosSantosRodrigues/main/README.md', 
-      'readme3.md'
+      'https://raw.githubusercontent.com/gcgfurb/tcc_RafaelDosSantosRodrigues/main/README.md',
+      'https://raw.githubusercontent.com/gcgfurb/tcc_MarcellaCoelhoBritoNunes/master/README.md',
+      'https://raw.githubusercontent.com/gcgfurb/tcc_GabrielOssamuRopelattoMori/master/README.md',
+      'https://raw.githubusercontent.com/gcgfurb/tcc_GiancarloCavalli/main/README.md',
+      'https://raw.githubusercontent.com/gcgfurb/tcc_RafaelDosSantosRodrigues/main/README.md',
+      'https://raw.githubusercontent.com/gcgfurb/tcc_GuilhermeSouzaDosSantos_JennyferAraujo/master/README.md'
     ]; // Liste os arquivos aqui
-    // const files = [
-    //   'https://github.com/gcgfurb/tcc_MarcellaCoelhoBritoNunes/blob/master/README.md',
-    //   'https://github.com/gcgfurb/tcc_GabrielOssamuRopelattoMori/blob/master/README.md',
-    //   'https://github.com/gcgfurb/tcc_GiancarloCavalli/blob/main/README.md',
-    //   'https://github.com/gcgfurb/tcc_RafaelDosSantosRodrigues/blob/main/README.md',
-    //   'https://github.com/gcgfurb/tcc_GuilhermeSouzaDosSantos_JennyferAraujo/blob/master/README.md'
-    // ]; // Liste os URLs dos arquivos aqui
-
     const container = document.getElementById('carousel');
 
-    Promise.all(files.map(file => 
+    Promise.all(files.map(file =>
       fetch(file)
         .then(res => res.text())
         .then(text => marked.parse(text))
@@ -68,4 +79,5 @@
     });
   </script>
 </body>
+
 </html>
