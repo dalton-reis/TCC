@@ -46,7 +46,11 @@
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
-        loop: false
+        loop: true,
+        autoplay: {
+          delay: 4000, // 4 segundos entre slides
+          disableOnInteraction: false
+        }
       });
     });
   </script>
