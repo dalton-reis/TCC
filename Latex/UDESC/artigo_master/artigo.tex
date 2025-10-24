@@ -8,7 +8,6 @@
 \usepackage{cite}
 %\usepackage{float}
 
-\usepackage[brazil]{babel}   
 \usepackage[utf8]{inputenc}  
 %\usepackage[alf]{abntex2cite}
 %\usepackage[style=abnt,backend=biber]{biblatex}
@@ -44,30 +43,17 @@ Texto do Resumo.
 \textbf{Palavras chaves:} Palavra 1, Palavra 2, Palavra 3.
 \end{resumo}
 
-\section{Introdução} \label{sec:introducao}
+% Dicas
+% 	•	\input{arquivo} não insere quebra de página e é ideal para seções pequenas.
+% 	•	\include{arquivo} insere quebra de página antes e depois, e gera arquivos .aux individuais (bom para projetos grandes).
 
-Texto da Introdução. 
+\input{secao_introducao}
 
-Mais Texto.
+\input{secao_ra}
 
-\section{Realidade Aumentada} \label{sec:aumentada}
+\input{secao_educacao}
 
-Texto aqui.  
-
-\section{Uso da Realidade Aumentada aplicada à Educação}\label{sec:aplicada}
-
-Texto aqui (Figura \ref{fig:Fig_Cavalli2024}).
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.99\textwidth]{figura.png}
-\caption{RA na Química: A) átomos $H_2O$ - B) elemento da água}
-\label{fig:Fig_Cavalli2024}
-\end{figure}
-
-\section{Considerações Finais}\label{sec:finais}
-
-Texto aqui \cite{Teste2025}.
+\input{secao_finais}
 
 \bibliographystyle{sbc}
 \bibliography{bibliografia}
