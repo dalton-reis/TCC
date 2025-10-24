@@ -1,0 +1,75 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage[brazil]{babel}
+\usepackage{quoting}
+\usepackage{setspace}
+\usepackage{graphicx,url}
+\usepackage{cite}
+%\usepackage{float}
+
+\usepackage[brazil]{babel}   
+\usepackage[utf8]{inputenc}  
+%\usepackage[alf]{abntex2cite}
+%\usepackage[style=abnt,backend=biber]{biblatex}
+
+\sloppy
+
+\title{Título Principal}
+
+\author{Dalton Solano dos Reis\inst{1}}
+
+\address{Programa de Pós-Graduação em Computação Aplicada (PPGCAP)\\
+Universidade do Estado de Santa Catarina (UDESC)
+\email{dalton@furb.br}
+}
+
+\begin{document} 
+\makeatletter
+\renewcommand{\@cite}[2]{({#1\if@tempswa , #2\fi})}
+\makeatother
+
+
+\maketitle
+
+\begin{abstract}
+Texto do Abstract.
+
+\textbf{Keywords:} Palavra 1, Palavra 2, Palavra 3.
+\end{abstract}
+     
+\begin{resumo} 
+Texto do Resumo.
+
+\textbf{Palavras chaves:} Palavra 1, Palavra 2, Palavra 3.
+\end{resumo}
+
+\section{Introdução} \label{sec:introducao}
+
+Texto da Introdução. 
+
+Mais Texto.
+
+\section{Realidade Aumentada} \label{sec:aumentada}
+
+Texto aqui.  
+
+\section{Uso da Realidade Aumentada aplicada à Educação}\label{sec:aplicada}
+
+Texto aqui (Figura \ref{fig:Fig_Cavalli2024}).
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.99\textwidth]{figura.png}
+\caption{RA na Química: A) átomos $H_2O$ - B) elemento da água}
+\label{fig:Fig_Cavalli2024}
+\end{figure}
+
+\section{Considerações Finais}\label{sec:finais}
+
+Texto aqui \cite{Teste2025}.
+
+\bibliographystyle{sbc}
+\bibliography{bibliografia}
+
+\end{document}
