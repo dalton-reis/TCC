@@ -1,0 +1,99 @@
+\documentclass{beamer}
+
+\usepackage{udesc}
+\usepackage{graphicx,url}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+
+\title[Título Rodapé]{Título Principal\\ Título Secundário}
+
+\author[Dalton Solano dos Reis]{ Dalton Solano dos Reis\texorpdfstring{\\ prof.
+  Marcelo da Silva Hounsell \\\medskip}{}%
+  {\small \href{mailto:dalton@furb.br}{dalton@furb.br}}}
+
+\institute[UDESC]{
+  Programa de Pós-Graduação em Computação Aplicada (PPGCAP)\\
+  Universidade do Estado de Santa Catarina (UDESC)}
+
+\begin{document}
+
+  \begin{frame}
+    \titlepage
+  \end{frame}
+
+  \section{Sumário}\label{sec:sumario}
+
+    \begin{frame}{Sumário}
+      \begin{itemize}
+        \item \ref{sec:um}: Assunto Um (1) 
+        \item \ref{sec:dois}: Assunto Dois (2)
+        \item \ref{sec:tres}: Assunto Três (3))
+        \item \ref{sec:quatro}: Assunto Quatro (4)
+        \item \ref{sec:referencias}: Referências
+      \end{itemize}
+    \end{frame}
+
+  \section{Assunto Um (1)}\label{sec:um}
+
+    \begin{frame}{Assunto Um (1)}
+      \begin{center}
+        \includegraphics[width=0.8\linewidth]{figura.png}
+        {\scriptsize\par Fonte: \cite{Teste2025}, acesso em 07/09/2025.}
+      \end{center}
+    \end{frame}
+
+  \section{Assunto Dois (2)}\label{sec:dois}
+
+    \begin{frame}{Assunto Dois (2)}
+      Itens
+      \begin{itemize}
+        \item a
+        \item b
+        \item c
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Assunto Dois (2)}
+      \begin{table}[h]
+        \centering
+        \scriptsize
+        \begin{tabular}{|l|r|l|l|}
+          \hline
+          \textbf{Coluna 1}  & \textbf{Coluna 2} & \textbf{Coluna 3} & \textbf{Coluna 4}  \\ \hline
+          a                  & 1                 & A                 & 1                  \\ \hline
+          b                  & 2                 & B                 & 2                  \\ \hline
+          c                  & 3                 & C                 & 3                  \\ \hline
+        \end{tabular}
+        \label{tab:buscas}
+      \end{table}
+    \end{frame}
+
+  \section{Assunto Três (3)}\label{sec:tres}
+
+    \begin{frame}{Assunto Três (3)}
+    \end{frame}
+
+  \section{Assunto Quatro (4)}\label{sec:quatro}
+
+    \begin{frame}{Assunto Quatro (4)}
+    \end{frame}
+
+  \section{Referências}\label{sec:referencias}
+
+    \begin{frame}{Referências}
+      \begingroup
+        \scriptsize
+        \bibliographystyle{sbc}
+        \bibliography{../../../Dr/DR_Estudo.bib}
+      \endgroup
+    \end{frame}
+
+  \begin{frame}
+    \titlepage
+  \end{frame}
+
+\end{document}
