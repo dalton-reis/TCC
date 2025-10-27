@@ -5,13 +5,20 @@
 \usepackage{quoting}
 \usepackage{setspace}
 \usepackage{graphicx,url}
-\usepackage{cite}
+% \usepackage{cite}
 %\usepackage{float}
 
-\usepackage[brazil]{babel}   
 \usepackage[utf8]{inputenc}  
-%\usepackage[alf]{abntex2cite}
+\usepackage[alf]{abntex2cite}
 %\usepackage[style=abnt,backend=biber]{biblatex}
+
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage[section]{placeins} % impede que floats (tabelas/figuras) ultrapassem o limite da seção
+
+\captionsetup{skip=2pt} % diminui o espaço entre legenda e tabela
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
 
 \sloppy
 
@@ -25,9 +32,9 @@ Universidade do Estado de Santa Catarina (UDESC)
 }
 
 \begin{document} 
-\makeatletter
-\renewcommand{\@cite}[2]{({#1\if@tempswa , #2\fi})}
-\makeatother
+% \makeatletter
+% \renewcommand{\@cite}[2]{({#1\if@tempswa , #2\fi})}
+% \makeatother
 
 
 \maketitle
@@ -67,9 +74,39 @@ Texto aqui (Figura \ref{fig:Fig_Cavalli2024}).
 
 \section{Considerações Finais}\label{sec:finais}
 
-Texto aqui \cite{Teste2025}.
+Exemplo de citações.
 
-\bibliographystyle{sbc}
+Exemplo de \textbf{citação parentética} \cite{Teste2025}.
+
+Segundo \citeonline{Teste2025}, esse é um exemplo de \textbf{citação narrativa}.
+
+
+Somente o autor: \citeauthor{Teste2025}.
+
+Somente o ano: \citeyear{Teste2025}.
+
+
+% \bibliographystyle{sbc}
+
+% --- Citações no padrão ABNT (NBR 10520) com abntex2cite ---
+% Citação parentética: \cite{chave}  -> (AUTOR, ano)
+% Citação narrativa:   \citeonline{chave} -> Autor (ano)
+% Outros: \citeauthor{chave} (apenas autor), \citeyear{chave} (apenas ano)
+\bibliographystyle{abntex2-alf}
 \bibliography{bibliografia}
+% \bibliography{../../../Dr/DR_Estudo}
+
+% Apêndice A
+\appendix
+\renewcommand{\thesection}{Apêndice \Alph{section}}
+\section{Um apêndice}\label{sec:apendA}
+
+Somente o apêndice A.
+
+
+% Apêndice B 
+\section{Outro apêndice}\label{sec:apendB}
+
+Mais um apêndice.
 
 \end{document}
