@@ -16,8 +16,9 @@
 
 % --- Bibliografia ABNT ---
 \usepackage{csquotes}
-\usepackage[style=abnt,language=brazil]{biblatex}
-\addbibresource{referencias.bib}
+\usepackage[style=abnt,backend=biber,language=brazil]{biblatex}
+% ln -s /Users/daltonreis/GitHub/disciplinas/UDESC_2025/Dr/DR_Estudo.bib
+\addbibresource{DR_Estudo.bib}
 
 % --- Ajustes de espaçamento e margens ---
 \usepackage[a4paper,margin=2.5cm]{geometry}
@@ -56,9 +57,8 @@ Este é o resumo em língua portuguesa. Deve conter uma síntese clara do conte�
 % ----------------------------------------------------------
 \section{Introdução}
 A introdução apresenta o tema, contextualização, problema e objetivo.  
-Exemplo de citação parentética: \cite{azumaRecentAdvancesAugmentedReality2001}.  
-% Exemplo de citação narrativa: segundo \citeonline{freinaSeriousGamesEducation2015}, os jogos sérios podem aumentar o engajamento.
-
+Exemplo de citação parentética: \cite{albuquerqueToyUserInterfaces2021}.  
+Exemplo de citação narrativa: segundo \textcite{aragaoEnsinoProgramacaoPensamento2023}, os jogos sérios podem aumentar o engajamento.
 % ----------------------------------------------------------
 \section{Referencial Teórico}
 De acordo com \cite{pimentelDesignScienceResearch2020}, a pesquisa baseada em design oferece um processo iterativo de melhoria de artefatos educacionais.
