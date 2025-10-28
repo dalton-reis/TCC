@@ -1,11 +1,11 @@
 % ----------------------------------------------------------
 % Modelo ABNT para artigo científico (ABNT NBR 6022 / 10520)
-% Compatível com arquivos .bib do Zotero (Better BibTeX)
+% Compatível com arquivos .bib (Better BibLaTeX)
 % ----------------------------------------------------------
-% \documentclass[12pt,oneside]{article}
-\documentclass[12pt,oneside]{abntex2}
+\documentclass[12pt,oneside]{article}
+% \documentclass[12pt,oneside]{abntex2}
 % --- Pacotes básicos ---
-\usepackage[brazil]{babel}
+\usepackage[english,brazil]{babel}
 \usepackage[utf8]{inputenc}     % codificação UTF-8
 \usepackage[T1]{fontenc}
 \usepackage{graphicx,url}
@@ -25,14 +25,17 @@
 % \setstretch{1.5}
 \sloppy
 
-% % --- Ambiente "resumo" (compatível com article) ---
-% % Define um ambiente básico de resumo para quem não usa a classe abnTeX2
-% % Ajuste livremente se desejar outro estilo
-% \newenvironment{resumo}{%
-%   \par\vspace{1em}%
-%   \begin{center}\bfseries Resumo\end{center}%
-%   \begin{quotation}%
-% }{\end{quotation}}
+\newenvironment{resumoEng}{%
+  \par\vspace{1em}%
+  \begin{center}\bfseries Abstract\end{center}%
+  \begin{quotation}%
+}{\end{quotation}}
+
+\newenvironment{resumoPort}{%
+  \par\vspace{1em}%
+  \begin{center}\bfseries Resumo\end{center}%
+  \begin{quotation}%
+}{\end{quotation}}
 
 % --- Formatação de título ---
 \title{Título do Artigo Segundo as Normas da ABNT}
@@ -42,17 +45,19 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-Este é o resumo em língua inglesa (abstract). Ele deve apresentar, de forma concisa, o objetivo, método, resultados e conclusões do artigo.
+\begin{otherlanguage*}{english}
+\begin{resumoEng}
+This is the abstract in English. It should succinctly present the article’s objective, method, results, and conclusions.
 
 \textbf{Keywords:} Augmented Reality, Education, Learning.
-\end{abstract}
+\end{resumoEng}
+\end{otherlanguage*}
 
-\begin{resumo}
+\begin{resumoPort}
 Este é o resumo em língua portuguesa. Deve conter uma síntese clara do conteúdo, incluindo objetivo, método, resultados e conclusões.
 
 \textbf{Palavras-chave:} Realidade Aumentada, Educação, Aprendizagem.
-\end{resumo}
+\end{resumoPort}
 
 % ----------------------------------------------------------
 \section{Introdução}
