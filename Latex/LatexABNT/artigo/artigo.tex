@@ -47,52 +47,78 @@
 
 \begin{otherlanguage*}{english}
 \begin{resumoEng}
-This is the abstract in English. It should succinctly present the article’s objective, method, results, and conclusions.
+This is the abstract in English. It should succinctly present the article’s
+objective, method, results, and conclusions.
 
 \textbf{Keywords:} Augmented Reality, Education, Learning.
 \end{resumoEng}
 \end{otherlanguage*}
 
 \begin{resumoPort}
-Este é o resumo em língua portuguesa. Deve conter uma síntese clara do conteúdo, incluindo objetivo, método, resultados e conclusões.
+Este é o resumo em língua portuguesa. Deve conter uma síntese clara do conteúdo,
+incluindo objetivo, método, resultados e conclusões.
 
 \textbf{Palavras-chave:} Realidade Aumentada, Educação, Aprendizagem.
 \end{resumoPort}
 
 % ----------------------------------------------------------
-\section{Introdução}
+\section{Introdução}\label{sec:introducao}
+
 A introdução apresenta o tema, contextualização, problema e objetivo.  
-Exemplo de citação parentética: \cite{albuquerqueToyUserInterfaces2021}.  
-Exemplo de citação narrativa: segundo \textcite{aragaoEnsinoProgramacaoPensamento2023}, os jogos sérios podem aumentar o engajamento.
-% ----------------------------------------------------------
-\section{Referencial Teórico}
-De acordo com \cite{pimentelDesignScienceResearch2020}, a pesquisa baseada em design oferece um processo iterativo de melhoria de artefatos educacionais.
+
+% Exemplo de citação parentética \cite{albuquerqueToyUserInterfaces2021}.  
+Exemplo de citação parentética \parencite{albuquerqueToyUserInterfaces2021}.  
+
+Exemplo de citação narrativa, que segundo
+\textcite{aragaoEnsinoProgramacaoPensamento2023}, os jogos sérios podem aumentar
+o engajamento.
+
+Exemplo de citação com página
+\cite[p.~25]{azumaRecentAdvancesAugmentedReality2001}:
+\begin{displayquote}
+\small
+Com um texto para citação direta que deve ter mais de três linhas de texto
+falando sobre alguma coisa qualquer. Assim se tem três linhas de um texto
+qualquer, pois se precisa ter todo esse texto.
+\end{displayquote}
+
 
 % ----------------------------------------------------------
-\section{Metodologia}
+\section{Referencial Teórico}\label{sec:referencialTeorico}
+
+De acordo com \cite{pimentelDesignScienceResearch2020}, a pesquisa baseada em
+design oferece um processo iterativo de melhoria de artefatos educacionais.
+
+% ----------------------------------------------------------
+\section{Metodologia}\label{sec:metodologia}
 Descreve o método, instrumentos e procedimentos adotados.  
 Use listas com \texttt{enumitem}:
 \begin{enumerate}[label=\alph*)]
-  \item Definição das variáveis;
-  \item Aplicação dos testes;
-  \item Análise dos resultados.
+  \item definição das variáveis;
+  \item aplicação dos testes;
+  \item análise dos resultados.
 \end{enumerate}
 
 % ----------------------------------------------------------
-\section{Resultados e Discussão}
-Os resultados devem ser apresentados de forma objetiva, com tabelas e figuras (Figura~\ref{fig:exemplo}).
+\section{Resultados e Discussão}\label{sec:resultadosDiscussao}
+
+Os resultados devem ser apresentados de forma objetiva, com tabelas e figuras
+(Figura~\ref{fig:exemplo}).
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=.9\textwidth]{figura.png}
-  \caption{Exemplo ilustrativo de figura.}
-  \label{fig:exemplo}
+\centering
+\caption{Exemplo ilustrativo de figura}
+\fbox{\includegraphics[width=0.7\textwidth]{figura.png}}
+\\[2pt]
+{\small Fonte: elaborado pelo autor.}
+\label{fig:exemplo}
 \end{figure}
+\vspace{-6pt}
 
 % ----------------------------------------------------------
-\section{Considerações Finais}
+\section{Considerações Finais}\label{sec:consideracoesFinais}
+
 As conclusões devem relacionar os resultados aos objetivos.  
-Citação com página: \cite[p.~25]{azumaRecentAdvancesAugmentedReality2001}.
 
 % ----------------------------------------------------------
 \printbibliography
