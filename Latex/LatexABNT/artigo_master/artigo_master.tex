@@ -74,80 +74,21 @@ incluindo objetivo, método, resultados e conclusões.
 \end{resumoPort}
 
 % ----------------------------------------------------------
-\section{Introdução}\label{sec:introducao}
-
-A introdução apresenta o tema, contextualização, problema e objetivo.  
-
-% Exemplo de citação parentética \cite{albuquerqueToyUserInterfaces2021}.  
-Exemplo de citação parentética \parencite{albuquerqueToyUserInterfaces2021}.  
-
-Exemplo de citação narrativa, que segundo
-\textcite{aragaoEnsinoProgramacaoPensamento2023}, os jogos sérios podem aumentar
-o engajamento.
-
-Exemplo de citação com página
-\cite[p.~25]{azumaRecentAdvancesAugmentedReality2001}:
-\begin{displayquote}
-\small
-Com um texto para citação direta que deve ter mais de três linhas de texto
-falando sobre alguma coisa qualquer. Assim se tem três linhas de um texto
-qualquer, pois se precisa ter todo esse texto.
-\end{displayquote}
-
+% Dicas
+% 	•	\input{arquivo} não insere quebra de página e é ideal para seções pequenas.
+% 	•	\include{arquivo} insere quebra de página antes e depois, e gera arquivos .aux individuais (bom para projetos grandes).
 
 % ----------------------------------------------------------
-\section{Referencial Teórico}\label{sec:referencialTeorico}
 
-De acordo com \cite{pimentelDesignScienceResearch2020}, a pesquisa baseada em
-design oferece um processo iterativo de melhoria de artefatos educacionais.
+\input{secao_introducao}
 
-% ----------------------------------------------------------
-\section{Metodologia}\label{sec:metodologia}
-Descreve o método, instrumentos e procedimentos adotados.  
-Use listas com \texttt{enumitem}:
-\begin{enumerate}[label=\alph*), itemsep=0pt, topsep=0pt, parsep=0pt, partopsep=0pt]
-  \item definição das variáveis;
-  \item aplicação dos testes;
-  \item análise dos resultados.
-\end{enumerate}
+\input{secao_referencialTeorico}
 
-% ----------------------------------------------------------
-\section{Resultados e Discussão}\label{sec:resultadosDiscussao}
+\input{secao_metodologia}
 
-Os resultados devem ser apresentados de forma objetiva, com tabelas e figuras
-(Figura~\ref{fig:exemplo}).
+\input{secao_resultadosDiscussao}
 
-\begin{figure}[ht]
-\centering
-\caption{Exemplo ilustrativo de figura}
-\begingroup
-\setlength{\fboxsep}{0pt}
-\fbox{\includegraphics[width=0.7\textwidth]{figura.png}}
-\endgroup
-\\[2pt]
-{\small Fonte: elaborado pelo autor.}
-\label{fig:exemplo}
-\end{figure}
-\vspace{-6pt}
-
-% ----------------------------------------------------------
-\section{Considerações Finais}\label{sec:consideracoesFinais}
-
-As conclusões devem relacionar os resultados aos objetivos. 
-
-Exemplo para ser usado com tiver trecho de código, como exemplo o nome de uma
-classe \texttt{Algoritmo}.
-
-Ou ainda, método \verb|push_back| da classe \texttt{Vector}. Use texttt\ para
-palavras/identificadores e verb quando houver barras, sublinhados, etc.
-
-A classe \code{Algorithm} gerencia a lista de \code{logs}.
-
-A classe \lstinline!Algorithm! valida os blocos.
-
-\begin{lstlisting}[language=Java, caption={Exemplo de classe}, label={lst:ex}]
-class Algorithm { ... }
-\end{lstlisting}
+\input{secao_consideracoesFinais}
 
 % ----------------------------------------------------------
 \printbibliography
@@ -155,8 +96,5 @@ class Algorithm { ... }
 % ----------------------------------------------------------
 \appendix
 \renewcommand{\thesection}{Apêndice \Alph{section}}
-
-\section{Exemplo de Apêndice}
-Material complementar, questionários ou dados adicionais.
 
 \end{document}
