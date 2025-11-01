@@ -1,7 +1,3 @@
-% ----------------------------------------------------------
-% Modelo de slides Beamer (ABNT via biblatex)
-% Compatível com Better BibTeX (.bib) e biber
-% ----------------------------------------------------------
 \documentclass[aspectratio=169]{beamer}
 
 % Tema/cores (ajuste ao seu gosto)
@@ -48,11 +44,11 @@
 \date{2025}
 
 % Sumário automático no início de cada seção
-\AtBeginSection[]{
-  \begin{frame}{Roteiro}
-    \tableofcontents[currentsection]
-  \end{frame}
-}
+% \AtBeginSection[]{
+%   \begin{frame}{Roteiro}
+%     \tableofcontents[currentsection]
+%   \end{frame}
+% }
 
 \begin{document}
 
@@ -89,25 +85,10 @@ qualquer, pois se precisa ter todo esse texto.
 \end{frame}
 
 % ----------------------------------------------------------
-\section{Referencial Teórico}
+\section{Conteúdo}
 
-\begin{frame}{Referencial Teórico}
-De acordo com \parencite{pimentelDesignScienceResearch2020}, a pesquisa baseada em
-design oferece um processo iterativo de melhoria de artefatos educacionais
-(veja Apêndice~\ref{sec:apendiceA}).
-\end{frame}
-
-% ----------------------------------------------------------
-\section{Metodologia}
-
-\begin{frame}{Metodologia}
-Descreve o método, instrumentos e procedimentos adotados:
-
-\begin{enumerate}[label=\alph*), itemsep=2pt]
-  \item definição das variáveis;
-  \item aplicação dos testes;
-  \item análise dos resultados.
-\end{enumerate}
+\begin{frame}{Conteúdo}
+Texo com o conteúdo.
 \end{frame}
 
 % ----------------------------------------------------------
@@ -121,16 +102,6 @@ Descreve o método, instrumentos e procedimentos adotados:
 {\tiny Fonte: elaborado pelo autor.}
 \end{frame}
 
-\begin{frame}[fragile]{Resultados (exemplo de código)}
-A classe \code{Algorithm} gerencia a lista de \code{logs}.  
-A classe \lstinline!Algorithm! valida os blocos.
-\begin{lstlisting}[language=Java, caption={Exemplo de classe}, label={lst:ex}]
-class Algorithm {
-  // ...
-}
-\end{lstlisting}
-\end{frame}
-
 % ----------------------------------------------------------
 \section{Considerações Finais}
 
@@ -142,16 +113,6 @@ Exemplos:
   \item Classe \texttt{Algoritmo} e método \verb|push_back|.
   \item Use \verb|\texttt| para identificadores e \verb|\verb| para comandos com barras/sublinhados.
 \end{itemize}
-\end{frame}
-
-% ----------------------------------------------------------
-\appendix
-\renewcommand{\thesection}{Apêndice \Alph{section}}
-
-\section{Material Suplementar}
-
-\begin{frame}{Exemplo de Apêndice}\label{sec:apendiceA}
-Material complementar, questionários ou dados adicionais.
 \end{frame}
 
 % ----------------------------------------------------------
