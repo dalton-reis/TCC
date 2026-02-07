@@ -1,7 +1,7 @@
 # 📘 Modelos de Prompt para Audio Livro longo (Google + NotebookLM)
 
 ```text
-Gere um resumo em áudio extenso, que descreva todo o conteúdo do artigo, estruturado e fiel ao conteúdo do artigo fornecido, adequado para escuta contínua e prolongada, como um audiolivro acadêmico.
+Gere um resumo em português (Brasil) áudio extenso, que descreva todo o conteúdo do artigo em anexo, estruturado e fiel ao conteúdo do artigo fornecido, adequado para escuta contínua e prolongada, como um audiolivro acadêmico.
 Não adicione opiniões, julgamentos de valor, comparações externas ou inferências que não estejam explicitamente presentes no texto do artigo.
 
 Orientações gerais de narração:
@@ -39,7 +39,8 @@ Após percorrer todas as seções, faça uma síntese integradora, retomando:
 Finalize o áudio com uma seção claramente identificada, relacionando o conteúdo do artigo aos seguintes eixos:
 	•	Pensamento Computacional
 	•	Diretrizes de Desenvolvimento de Artefatos
-	•	Realidade Mista
+	•	Realidade Estendida (ou mesmo Realidade Virtual, Realidade Aumentada e Realidade Mista)
+	•	E se pesquisou e/ou produziu algum tipo de artefato educacional na forma digital ou desplugada
 
 Para cada eixo:
 	•	indique quais conceitos, métodos, tecnologias ou resultados do artigo se relacionam com ele,
