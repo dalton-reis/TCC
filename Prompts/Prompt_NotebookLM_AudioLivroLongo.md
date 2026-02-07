@@ -1,7 +1,7 @@
 # 📘 Modelos de Prompt para Audio Livro longo (Google + NotebookLM)
 
 ```text
-Gere um resumo em áudio extenso, estruturado e fiel ao conteúdo do artigo fornecido, adequado para escuta contínua e prolongada, como um audiolivro acadêmico.
+Gere um resumo em áudio extenso, que descreva todo o conteúdo do artigo, estruturado e fiel ao conteúdo do artigo fornecido, adequado para escuta contínua e prolongada, como um audiolivro acadêmico.
 Não adicione opiniões, julgamentos de valor, comparações externas ou inferências que não estejam explicitamente presentes no texto do artigo.
 
 Orientações gerais de narração:
