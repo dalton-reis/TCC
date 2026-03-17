@@ -1,4 +1,4 @@
-# 📘 Modelos de Prompt para Explicar Código (VSCode + Codex)
+# 📘 Modelos de Prompt para Explicar Código do Workspace (VSCode + Codex)
 
 ```text
 Quero uma explicação completa deste workspace em três níveis:
