@@ -1,102 +1,102 @@
 % ----------------------------------------------------------
 % Modelo ABNT para artigo científico (ABNT NBR 6022 / 10520)
-% Compatível com arquivos .bib (Better BibLaTeX)
+% Conteúdo convertido de 2024-1_Artigo-TCC-BCC-modelo.docx
 % ----------------------------------------------------------
-\documentclass[12pt,oneside]{article}
-% \documentclass[12pt,oneside]{abntex2}
+\documentclass[10pt,oneside,a4paper]{article}
+
 % --- Pacotes básicos ---
 \usepackage[english,brazilian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
 \usepackage{graphicx,url}
 \usepackage{setspace}
 \usepackage{enumitem}
-% \usepackage{caption}
-\usepackage[section]{placeins}  % impede figuras fora da seção
+\usepackage[normalem]{ulem}
+\newcommand{\ul}[1]{\uline{#1}}
+\usepackage[section]{placeins}
+\usepackage{indentfirst}
+\usepackage{caption}
+
+% --- Quadros e tabelas convertidos do DOCX ---
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage{longtable}
 
 % --- Bibliografia ABNT ---
 \usepackage{csquotes}
 \usepackage[style=abnt,backend=biber,language=brazil]{biblatex}
-\addbibresource{Zotero_MinhaBiblioteca.bib}      % ln -s /Users/daltonreis/Zotero/Zotero_MinhaBiblioteca.bib
+\addbibresource{Zotero_MinhaBiblioteca.bib}
 
 % --- Ajustes de espaçamento e margens ---
 \usepackage[a4paper,margin=2.5cm]{geometry}
-% \setstretch{1.5}
+\setstretch{1.0}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{6pt}
 \sloppy
 
 % --- Formatar textos de código ---
-% \lstlistoflistings        % colocar no texto para gerar uma lista desses itens
 \newcommand{\code}[1]{\texttt{#1}}
 \usepackage{listings}
 \lstset{
-  basicstyle=\ttfamily,      % monoespaçada
-  columns=fullflexible,      % melhor espaçamento
-  keepspaces=true,           % preserva espaços
-  upquote=true               % aspas retas em verbatim
+  basicstyle=\ttfamily\footnotesize,
+  columns=fullflexible,
+  keepspaces=true,
+  upquote=true,
+  frame=single,
+  breaklines=true
 }
 \renewcommand{\lstlistingname}{Listagem}
 \renewcommand{\lstlistlistingname}{Lista de listagens}
 
-\newenvironment{resumoEng}{%
-  \par\vspace{1em}%
-  \begin{center}\bfseries Abstract\end{center}%
-  \begin{quotation}%
-}{\end{quotation}}
-
-\newenvironment{resumoPort}{%
-  \par\vspace{1em}%
-  \begin{center}\bfseries Resumo\end{center}%
-  \begin{quotation}%
-}{\end{quotation}}
-
-% --- Formatação de título ---
-\title{INSTRUÇÕES PARA O ARTIGO DO TRABALHO DE CONCLUSÃO DE CURSO – BCC}
-\author{Autor(a) Nome Completo\thanks{Instituição, e-mail: autor@exemplo.com}}
-\date{2025}
+\setlist[enumerate]{label=\alph*), itemsep=0pt, topsep=0pt, parsep=0pt, partopsep=0pt}
+\captionsetup{font=small,labelfont=bf,justification=centering}
 
 \begin{document}
-\maketitle
 
-\begin{otherlanguage*}{english}
-\begin{resumoEng}
-This is the abstract in English. It should succinctly present the article’s
-objective, method, results, and conclusions.
+\begin{center}
+\textbf{INSTRUÇÕES PARA O ARTIGO DO TRABALHO DE CONCLUSÃO DE CURSO -- BCC}
 
-\textbf{Keywords:} Augmented Reality, Education, Learning.
-\end{resumoEng}
-\end{otherlanguage*}
+\vspace{0.4cm}
+João Pedro da Silva, José Carlos Pereira -- Orientador
 
-\begin{resumoPort}
-Este é o resumo em língua portuguesa. Deve conter uma síntese clara do conteúdo,
-incluindo objetivo, método, resultados e conclusões.
+Curso de Bacharel em Ciência da Computação
 
-\textbf{Palavras-chave:} Realidade Aumentada, Educação, Aprendizagem.
-\end{resumoPort}
+Departamento de Sistemas e Computação
 
-% ----------------------------------------------------------
-% Dicas
-% 	•	\input{arquivo} não insere quebra de página e é ideal para seções pequenas.
-% 	•	\include{arquivo} insere quebra de página antes e depois, e gera arquivos .aux individuais (bom para projetos grandes).
+Universidade Regional de Blumenau (FURB) -- Blumenau, SC -- Brasil
 
-% ----------------------------------------------------------
+maildoaluno@furb.br, maildoorientador@furb.br
+\end{center}
+
+\noindent\textbf{Resumo:} O resumo é uma apresentação concisa dos pontos relevantes de
+um texto. Informa suficientemente ao leitor, para que este possa decidir
+sobre a conveniência da leitura do texto inteiro. Deve conter
+OBRIGATORIAMENTE o OBJETIVO, METODOLOGIA, RESULTADOS e CONCLUSÕES. O
+resumo não deve ultrapassar 10 linhas e deve ser composto de uma
+sequência corrente de frases concisas e não de uma enumeração de
+tópicos. O resumo deve ser escrito em um único texto corrido (sem
+parágrafos). Deve-se usar a terceira pessoa do singular. As
+palavras-chave, a seguir, são separadas por ponto, com a primeira letra
+maiúscula. Caso uma palavra-chave seja composta por mais de uma palavra,
+somente a primeira deve ser escrita com letra maiúscula, sendo que as
+demais iniciam com letra minúscula, desde que não sejam nomes próprios.
+
+\noindent\textbf{Palavras-chave}: Ciência da computação. Sistemas de informação.
+Monografia. Resumo. Formato.
 
 \input{secao_introducao}
-
 \input{secao_referencialTeorico}
-
-\input{secao_metodologia}
-
+\input{secao_descricao}
 \input{secao_resultadosDiscussao}
-
 \input{secao_consideracoesFinais}
+\input{secao_referencias}
 
-% ----------------------------------------------------------
-\printbibliography
-
-% ----------------------------------------------------------
 \appendix
 \renewcommand{\thesection}{Apêndice \Alph{section}}
-
-\input{secao_apendiceA.tex}
+\input{secao_apendiceA}
+\input{secao_anexoA}
 
 \end{document}
