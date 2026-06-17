@@ -14,6 +14,7 @@
 
 % ----------------------------------------------------------
 % Gráficos e layout
+% \usepackage{svg}
 \usepackage{graphicx,url}
 \usepackage{enumitem}
 \usepackage{csquotes}
@@ -22,7 +23,7 @@
 % ----------------------------------------------------------
 % Bibliografia ABNT (biber)
 \usepackage[style=abnt,backend=biber,language=brazil]{biblatex}
-\addbibresource{DR_Estudo.bib}
+\addbibresource{Zotero_MinhaBiblioteca.bib}      % ln -s /Users/daltonreis/Zotero/Zotero_MinhaBiblioteca.bib
 
 % ----------------------------------------------------------
 \usepackage{listings}
@@ -94,13 +95,21 @@ Texo com o conteúdo.
 % ----------------------------------------------------------
 \section{Resultados e Discussão}
 
-\begin{frame}{Resultados (exemplo de figura)}
+\begin{frame}{Resultados (exemplo de figura - PNG)}
 \begin{figure}
   \includegraphics[width=0.72\linewidth]{figura.png}
   \caption{Exemplo ilustrativo de figura}
 \end{figure}
 {\tiny Fonte: elaborado pelo autor.}
 \end{frame}
+
+% \begin{frame}{Resultados (exemplo de figura - SVG)}
+% \begin{figure}
+%   \includegraphics[width=0.72\linewidth]{figura.drawio.svg}
+%   \caption{Exemplo ilustrativo de figura}
+% \end{figure}
+% {\tiny Fonte: elaborado pelo autor.}
+% \end{frame}
 
 % ----------------------------------------------------------
 \section{Considerações Finais}
