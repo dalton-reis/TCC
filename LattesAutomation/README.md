@@ -30,13 +30,15 @@ servem como ponto de partida; portais institucionais podem mudar sem aviso.
 lattes-automation collect --advisor "Nome completo"
 
 # Validar o arquivo depois da revisão manual
-lattes-automation validate data/exported/tccs_AAAAMMDD_HHMMSS.csv
+lattes-automation validate data/exported/tccs.csv
 
 # Preencher a primeira linha de dados revisada (sem salvar)
-lattes-automation fill data/exported/tccs_AAAAMMDD_HHMMSS.csv --row 1
+lattes-automation fill data/exported/tccs.csv --row 1
 ```
 
 No CSV, altere `reviewed` para `true` somente após conferir o registro.
+Novas coletas sobrescrevem `data/exported/tccs.csv`, permitindo que o Git
+registre somente as diferenças entre as versões sucessivas dos dados.
 
 ## Testes
 

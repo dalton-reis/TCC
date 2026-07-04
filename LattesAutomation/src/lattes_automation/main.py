@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-from datetime import datetime
 from pathlib import Path
 
 from loguru import logger
@@ -41,9 +40,7 @@ def build_parser() -> argparse.ArgumentParser:
 async def _collect(config: AppConfig, advisor: str, output: Path | None) -> int:
     async with browser_context(config.browser) as context:
         records = await BibliotecaCollector(context, config).collect(advisor)
-    destination = output or config.paths["exported"] / (
-        f"tccs_{datetime.now():%Y%m%d_%H%M%S}.csv"
-    )
+    destination = output or config.paths["exported"] / "tccs.csv"
     count = write_records(records, destination)
     logger.info("{} registros gravados em {}.", count, destination)
     return 0 if count else 1

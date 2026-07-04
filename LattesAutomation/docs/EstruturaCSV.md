@@ -1,6 +1,8 @@
 # Estrutura CSV
 
 O arquivo usa UTF-8 com BOM e `;` como separador.
+O caminho padrão é `data/exported/tccs.csv`. O nome é estável para que novas
+coletas sejam registradas pelo Git como alterações do mesmo arquivo.
 
 | Coluna | Obrigatória | Descrição |
 |---|---:|---|
