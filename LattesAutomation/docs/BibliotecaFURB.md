@@ -7,10 +7,11 @@ aberta sem antes inicializar a sessão na página de busca.
 Fluxo implementado:
 
 1. abrir `pesqCabecalho.php?menu=rapida` para inicializar a sessão;
-2. abrir o cabeçalho configurado em `biblioteca.authority_url`;
+2. pesquisar o nome recebido em `--advisor` e selecionar a correspondência exata;
 3. coletar todas as páginas `consultaCabecalho.php?...&pagina=N`;
 4. abrir cada detalhe `recuperaMfnCompleto.php?...&CdMFN=N`;
 5. salvar o HTML bruto e extrair os campos.
 
-O cabeçalho `CdCabecalho=67983` possui 164 títulos na consulta observada. Nem
-todo título é necessariamente TCC; a revisão do CSV continua obrigatória.
+O comparador aceita tanto `Nome Sobrenome` quanto o formato catalográfico
+`Sobrenome, Nome`, mas rejeita resultados ambíguos. Nem todo título encontrado
+é necessariamente TCC; a revisão do CSV continua obrigatória.

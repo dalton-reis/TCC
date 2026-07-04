@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+import unicodedata
 from urllib.parse import urljoin
 
 from loguru import logger
@@ -10,6 +12,14 @@ from playwright.async_api import BrowserContext, Page
 from .config import AppConfig
 from .extraction import extract_record
 from .models import TccRecord
+
+
+def person_name_key(value: str) -> tuple[str, ...]:
+    """Normaliza nomes, desconsiderando ordem, pontuação, acentos e datas."""
+    value = re.sub(r"\b\d{4}\s*-\s*(?:\d{4})?\b", " ", value)
+    value = unicodedata.normalize("NFKD", value)
+    ascii_value = value.encode("ascii", "ignore").decode().casefold()
+    return tuple(sorted(re.findall(r"[a-z]+", ascii_value)))
 
 
 class BibliotecaCollector:
@@ -25,13 +35,8 @@ class BibliotecaCollector:
         page = await self._context.new_page()
         try:
             await page.goto(str(self._config.biblioteca["search_url"]))
-            authority_url = str(self._config.biblioteca.get("authority_url", "")).strip()
-            if authority_url:
-                # A visita anterior inicializa a sessão PHP exigida pelo portal.
-                await page.goto(authority_url)
-            else:
-                authority_url = await self._find_authority(page, advisor)
-                await page.goto(authority_url)
+            authority_url = await self._find_authority(page, advisor)
+            await page.goto(authority_url)
             links = await self._collect_authority_links(page)
             logger.info("{} páginas de detalhes encontradas.", len(links))
             return await self._extract_all(links)
@@ -48,14 +53,24 @@ class BibliotecaCollector:
         count = await candidates.count()
         if count == 0:
             raise RuntimeError(f"Nenhum autor encontrado para {advisor!r}.")
-        exact = candidates.filter(has_text=advisor)
-        exact_count = await exact.count()
-        if exact_count != 1:
+        entries: list[dict[str, str]] = await candidates.evaluate_all(
+            """
+            (nodes) => nodes.map((node) => ({
+                text: (node.textContent || "").trim(),
+                href: node.href
+            }))
+            """
+        )
+        expected_key = person_name_key(advisor)
+        matches = [
+            entry for entry in entries if person_name_key(entry["text"]) == expected_key
+        ]
+        if len(matches) != 1:
             raise RuntimeError(
-                f"A busca encontrou {count} autores e {exact_count} correspondências "
-                "exatas. Defina biblioteca.authority_url em config/config.yaml."
+                f"A busca encontrou {count} autores e {len(matches)} correspondências "
+                f"exatas para {advisor!r}."
             )
-        href = await exact.get_attribute("href")
+        href = matches[0]["href"]
         if not href:
             raise RuntimeError("O resultado do autor não possui URL.")
         return urljoin(str(self._config.biblioteca["base_url"]), href)

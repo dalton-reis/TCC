@@ -6,7 +6,6 @@ browser:
 biblioteca:
   base_url: "https://bu.furb.br"
   search_url: "https://bu.furb.br/consulta/portalConsulta/pesqCabecalho.php?menu=rapida"
-  authority_url: "https://bu.furb.br/consulta/portalConsulta/consultaCabecalho.php?menu=rapida&CdCabecalho=67983&DsTabela=AUTORIDADE&origem=1"
   max_pages: 100
 
 lattes:
