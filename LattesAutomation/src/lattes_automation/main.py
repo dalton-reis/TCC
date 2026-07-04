@@ -25,7 +25,11 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
 
     collect = commands.add_parser("collect", help="Coleta TCCs e gera CSV.")
-    collect.add_argument("--advisor", required=True, help="Nome completo do orientador.")
+    collect.add_argument(
+        "--advisor",
+        required=True,
+        help='Nome do orientador (ex.: "Dalton Solano dos Reis").',
+    )
     collect.add_argument("--output", type=Path)
 
     validate = commands.add_parser("validate", help="Valida um CSV intermediário.")

@@ -45,7 +45,7 @@ servem como ponto de partida; portais institucionais podem mudar sem aviso.
 
 ```bash
 # Biblioteca → CSV
-lattes-automation collect --advisor "Nome completo"
+lattes-automation collect --advisor "Dalton Solano dos Reis"
 
 # Validar o arquivo depois da revisão manual
 lattes-automation validate data/exported/tccs.csv
