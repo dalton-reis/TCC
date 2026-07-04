@@ -1,0 +1,27 @@
+# Ajuste estes seletores após inspecionar as páginas atuais.
+biblioteca:
+  search_input: 'input[type="search"]'
+  search_submit: 'button[type="submit"]'
+  result_links: 'a[href*="record"], a[href*="detail"]'
+  next_page: 'a[rel="next"]'
+  detail:
+    title: 'h1'
+    fields: 'dl, table'
+
+lattes:
+  completed_guidance_link:
+    role: "link"
+    name: "Orientações e supervisões concluídas"
+  add_button:
+    role: "button"
+    name: "Adicionar"
+  fields:
+    student_name: 'input[name*="nome"]'
+    title: 'input[name*="titulo"]'
+    year: 'input[name*="ano"]'
+    institution: 'input[name*="instituicao"]'
+    course: 'input[name*="curso"]'
+    work_type: 'select[name*="tipo"]'
+  forbidden_save:
+    - 'button:has-text("Salvar")'
+    - 'input[value="Salvar"]'

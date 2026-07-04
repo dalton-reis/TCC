@@ -2,3 +2,8 @@ beautifulsoup4>=4.12
 loguru>=0.7
 playwright>=1.49
 PyYAML>=6.0
+
+[dev]
+mypy>=1.13
+pytest>=8.3
+ruff>=0.8

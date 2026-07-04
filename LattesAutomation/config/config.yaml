@@ -1,0 +1,18 @@
+browser:
+  headless: false
+  slow_mo_ms: 100
+  timeout_ms: 30000
+
+biblioteca:
+  base_url: "https://bu.furb.br"
+  search_url: "https://bu.furb.br"
+  max_pages: 100
+
+lattes:
+  url: "https://wwws.cnpq.br/cvlattesweb/"
+
+paths:
+  raw: "data/raw"
+  processed: "data/processed"
+  exported: "data/exported"
+  logs: "data/logs"

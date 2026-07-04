@@ -1,0 +1,2 @@
+[console_scripts]
+lattes-automation = lattes_automation.main:main

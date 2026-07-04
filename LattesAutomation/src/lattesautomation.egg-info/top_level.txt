@@ -1,0 +1,7 @@
+biblioteca
+browser
+lattes
+lattes_automation
+models
+services
+utils

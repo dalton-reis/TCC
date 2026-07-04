@@ -1,3 +1,20 @@
+Metadata-Version: 2.4
+Name: lattesautomation
+Version: 0.1.0
+Summary: Coleta TCCs da Biblioteca da FURB e auxilia o preenchimento do Lattes.
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: beautifulsoup4>=4.12
+Requires-Dist: loguru>=0.7
+Requires-Dist: playwright>=1.49
+Requires-Dist: PyYAML>=6.0
+Provides-Extra: dev
+Requires-Dist: mypy>=1.13; extra == "dev"
+Requires-Dist: pytest>=8.3; extra == "dev"
+Requires-Dist: ruff>=0.8; extra == "dev"
+Dynamic: license-file
+
 # LattesAutomation
 
 Coleta TCCs da Biblioteca da FURB, gera um CSV para revisão e auxilia o
