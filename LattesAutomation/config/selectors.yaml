@@ -1,12 +1,13 @@
 # Ajuste estes seletores após inspecionar as páginas atuais.
 biblioteca:
-  search_input: 'input[type="search"]'
-  search_submit: 'button[type="submit"]'
-  result_links: 'a[href*="record"], a[href*="detail"]'
-  next_page: 'a[rel="next"]'
+  search_input: '#expressaoBusca'
+  search_type_author: 'input[name="rdbtTpConsulta"][value="12"]'
+  search_submit: 'form[action*="listaCabecalho.php"] input[type="submit"]'
+  authority_links: 'a[href*="consultaCabecalho.php"][href*="CdCabecalho="]'
+  result_links: 'a[href*="recuperaMfnCompleto.php"][href*="CdMFN="]'
+  page_links: 'a[href*="consultaCabecalho.php"][href*="pagina="]'
   detail:
-    title: 'h1'
-    fields: 'dl, table'
+    fields: 'table tr'
 
 lattes:
   completed_guidance_link:

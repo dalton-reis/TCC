@@ -25,34 +25,61 @@ class BibliotecaCollector:
         page = await self._context.new_page()
         try:
             await page.goto(str(self._config.biblioteca["search_url"]))
-            await page.locator(self._selectors["search_input"]).fill(advisor)
-            await page.locator(self._selectors["search_submit"]).click()
-            links = await self._collect_result_links(page)
+            authority_url = str(self._config.biblioteca.get("authority_url", "")).strip()
+            if authority_url:
+                # A visita anterior inicializa a sessão PHP exigida pelo portal.
+                await page.goto(authority_url)
+            else:
+                authority_url = await self._find_authority(page, advisor)
+                await page.goto(authority_url)
+            links = await self._collect_authority_links(page)
             logger.info("{} páginas de detalhes encontradas.", len(links))
             return await self._extract_all(links)
         finally:
             await page.close()
 
-    async def _collect_result_links(self, page: Page) -> list[str]:
+    async def _find_authority(self, page: Page, advisor: str) -> str:
+        """Pesquisa o nome e retorna o cabeçalho de autoridade correspondente."""
+        await page.locator(self._selectors["search_type_author"]).check()
+        await page.locator(self._selectors["search_input"]).fill(advisor)
+        await page.locator(self._selectors["search_submit"]).click()
+        await page.wait_for_load_state("domcontentloaded")
+        candidates = page.locator(self._selectors["authority_links"])
+        count = await candidates.count()
+        if count == 0:
+            raise RuntimeError(f"Nenhum autor encontrado para {advisor!r}.")
+        exact = candidates.filter(has_text=advisor)
+        exact_count = await exact.count()
+        if exact_count != 1:
+            raise RuntimeError(
+                f"A busca encontrou {count} autores e {exact_count} correspondências "
+                "exatas. Defina biblioteca.authority_url em config/config.yaml."
+            )
+        href = await exact.get_attribute("href")
+        if not href:
+            raise RuntimeError("O resultado do autor não possui URL.")
+        return urljoin(str(self._config.biblioteca["base_url"]), href)
+
+    async def _collect_authority_links(self, page: Page) -> list[str]:
+        """Percorre todas as páginas de obras do cabeçalho selecionado."""
         links: list[str] = []
-        visited_pages: set[str] = set()
         max_pages = int(self._config.biblioteca["max_pages"])
-        for page_number in range(1, max_pages + 1):
-            current_url = page.url
-            if current_url in visited_pages:
-                logger.warning("Paginação cíclica detectada em {}.", current_url)
+        page_urls = await page.locator(self._selectors["page_links"]).evaluate_all(
+            "(nodes) => nodes.map((node) => node.href)"
+        )
+        pages = [page.url, *(str(url) for url in page_urls)]
+        for page_number, page_url in enumerate(dict.fromkeys(pages), start=1):
+            if page_number > max_pages:
+                logger.warning("Limite de {} páginas atingido.", max_pages)
                 break
-            visited_pages.add(current_url)
+            if page.url != page_url:
+                await page.goto(page_url)
             await page.wait_for_load_state("domcontentloaded")
             raw_links = await page.locator(self._selectors["result_links"]).evaluate_all(
                 "(nodes) => nodes.map((node) => node.href)"
             )
             links.extend(str(link) for link in raw_links)
             logger.debug("Página {}: {} links.", page_number, len(raw_links))
-            next_link = page.locator(self._selectors["next_page"])
-            if await next_link.count() == 0:
-                break
-            await next_link.click()
         return list(dict.fromkeys(links))
 
     async def _extract_all(self, links: list[str]) -> list[TccRecord]:

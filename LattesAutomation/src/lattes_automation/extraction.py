@@ -59,29 +59,64 @@ def _find_value(values: Mapping[str, str], field: str) -> str:
     return ""
 
 
+def _author_name(value: str) -> str:
+    """Remove datas catalográficas e converte ``Sobrenome, Nome``."""
+    value = re.sub(r",?\s*\d{4}\s*-\s*(?:\d{4})?\s*$", "", value).strip(" ,")
+    parts = [part.strip() for part in value.split(",") if part.strip()]
+    if len(parts) == 2:
+        return f"{parts[1]} {parts[0]}"
+    return value
+
+
 def extract_record(html: str, source_url: str = "") -> TccRecord:
     """Converte uma página de detalhes em :class:`TccRecord`."""
     soup = BeautifulSoup(html, "html.parser")
     values = extract_labeled_values(html)
+    rows = [
+        (
+            _normalize(cells[0].get_text(" ", strip=True)),
+            cells[1].get_text(" ", strip=True),
+        )
+        for row in soup.select("tr")
+        if len(cells := row.find_all(["th", "td"])) >= 2
+    ]
     title = _find_value(values, "title")
     if not title:
         heading = soup.select_one("h1")
         title = heading.get_text(" ", strip=True) if heading else ""
+    bibliographic_title = title
+    title = re.split(r"\s*/\s*", title, maxsplit=1)[0]
+    title = re.sub(r"\s*\[recurso eletrônico\]\s*", " ", title, flags=re.IGNORECASE)
     raw_year = _find_value(values, "year")
     year_match = re.search(r"\b(19|20)\d{2}\b", raw_year)
     if year_match is None:
-        year_match = re.search(r"\b(19|20)\d{2}\b", soup.get_text(" ", strip=True))
+        year_match = re.search(r"\b(19|20)\d{2}\b", bibliographic_title)
     if year_match is None:
         raise ValueError("Ano não encontrado na página do trabalho.")
+    notes = " ".join(value for label, value in rows if label == "notas")
+    advisor_match = re.search(
+        r"orientador(?:a)?\s*:\s*([^.;]+(?:\s+[^.;]+)*)",
+        notes,
+        flags=re.IGNORECASE,
+    )
+    secondary_authors = [
+        value for label, value in rows if label == "autor secundario"
+    ]
+    course = ""
+    for value in secondary_authors:
+        course_match = re.search(r"\bCurso de (.+?)[.]?$", value, flags=re.IGNORECASE)
+        if course_match:
+            course = course_match.group(1)
+            break
     return TccRecord(
-        student_name=_find_value(values, "student_name"),
+        student_name=_author_name(_find_value(values, "student_name")),
         title=title,
         year=int(year_match.group()),
-        course=_find_value(values, "course"),
+        course=course or _find_value(values, "course"),
         institution=_find_value(values, "institution")
         or "Universidade Regional de Blumenau",
         work_type=_find_value(values, "work_type")
         or "Trabalho de conclusão de curso de graduação",
-        advisor=_find_value(values, "advisor"),
+        advisor=advisor_match.group(1) if advisor_match else _find_value(values, "advisor"),
         source_url=source_url,
     )

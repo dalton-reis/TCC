@@ -19,3 +19,23 @@ def test_extract_record_from_table() -> None:
     assert record.year == 2025
     assert record.course == "Ciência da Computação"
     assert record.source_url == "https://example.test/1"
+
+
+def test_extract_real_furb_layout() -> None:
+    html = """
+    <table>
+      <tr><td>Autor</td><td>Lima, Matheus Soares, 1999-</td></tr>
+      <tr><td>Título</td><td>Explorahabitat : [recurso eletrônico] um projeto /
+      Matheus Soares Lima. - 2022. - 24 f.</td></tr>
+      <tr><td>Notas</td><td>Orientador: Dalton Solano dos Reis.</td></tr>
+      <tr><td>Autor Secundário</td><td>Reis, Dalton Solano dos, 1969-</td></tr>
+      <tr><td>Autor Secundário</td><td>Universidade Regional de Blumenau.
+      Curso de Ciência da Computação.</td></tr>
+    </table>
+    """
+    record = extract_record(html)
+    assert record.student_name == "Matheus Soares Lima"
+    assert record.title == "Explorahabitat : um projeto"
+    assert record.year == 2022
+    assert record.course == "Ciência da Computação"
+    assert record.advisor == "Dalton Solano dos Reis"
