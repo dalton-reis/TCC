@@ -11,6 +11,7 @@ src/lattes_automation/lattes.py
 src/lattes_automation/logging.py
 src/lattes_automation/main.py
 src/lattes_automation/models.py
+src/lattes_automation/py.typed
 src/lattes_automation/validation.py
 src/lattesautomation.egg-info/PKG-INFO
 src/lattesautomation.egg-info/SOURCES.txt

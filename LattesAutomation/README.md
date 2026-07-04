@@ -8,10 +8,10 @@ preenchimento do Currículo Lattes com Playwright.
 
 ## Instalação
 
-Requer Python 3.13.
+Requer Python 3.14.
 
 ```bash
-python3.13 -m venv .venv
+python3.14 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev]"
 playwright install chromium

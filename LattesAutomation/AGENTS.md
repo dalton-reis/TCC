@@ -1,6 +1,6 @@
 # AGENTS
 
-- Python 3.13
+- Python 3.14.0
 - Playwright
 - Nunca salvar automaticamente no Lattes.
 - Gerar CSV intermediário.

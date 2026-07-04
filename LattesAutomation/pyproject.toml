@@ -7,7 +7,7 @@ name = "lattesautomation"
 version = "0.1.0"
 description = "Coleta TCCs da Biblioteca da FURB e auxilia o preenchimento do Lattes."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "beautifulsoup4>=4.12",
     "loguru>=0.7",
@@ -44,6 +44,6 @@ target-version = "py313"
 select = ["E", "F", "I", "B", "UP"]
 
 [tool.mypy]
-python_version = "3.13"
+python_version = "3.14"
 strict = true
 packages = ["lattes_automation"]

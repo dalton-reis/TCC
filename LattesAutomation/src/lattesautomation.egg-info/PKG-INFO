@@ -2,7 +2,7 @@ Metadata-Version: 2.4
 Name: lattesautomation
 Version: 0.1.0
 Summary: Coleta TCCs da Biblioteca da FURB e auxilia o preenchimento do Lattes.
-Requires-Python: >=3.13
+Requires-Python: >=3.14
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: beautifulsoup4>=4.12
@@ -13,6 +13,7 @@ Provides-Extra: dev
 Requires-Dist: mypy>=1.13; extra == "dev"
 Requires-Dist: pytest>=8.3; extra == "dev"
 Requires-Dist: ruff>=0.8; extra == "dev"
+Requires-Dist: types-PyYAML>=6.0; extra == "dev"
 Dynamic: license-file
 
 # LattesAutomation
@@ -25,10 +26,10 @@ preenchimento do Currículo Lattes com Playwright.
 
 ## Instalação
 
-Requer Python 3.13.
+Requer Python 3.14.
 
 ```bash
-python3.13 -m venv .venv
+python3.14 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev]"
 playwright install chromium
