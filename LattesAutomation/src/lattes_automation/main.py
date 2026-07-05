@@ -36,6 +36,17 @@ def build_parser() -> argparse.ArgumentParser:
     validate = commands.add_parser("validate", help="Valida um CSV intermediário.")
     validate.add_argument("csv", type=Path)
 
+    sync = commands.add_parser(
+        "sync-lattes",
+        help="Atualiza a coluna cadastrado pela comparação com o XML do Lattes.",
+    )
+    sync.add_argument("csv", type=Path)
+    sync.add_argument(
+        "--xml",
+        type=Path,
+        help="XML exportado do Lattes; usa lattes.export_xml quando omitido.",
+    )
+
     fill = commands.add_parser("fill", help="Preenche um registro revisado no Lattes.")
     fill.add_argument("csv", type=Path)
     fill.add_argument("--row", type=int, required=True, help="Linha de dados, iniciando em 1.")
@@ -65,6 +76,19 @@ def _validate(path: Path) -> int:
         logger.warning("Linha {} [{}]: {}", issue.row, issue.severity, issue.message)
     logger.info("{} registros; {} ocorrências.", len(records), len(issues))
     return 1 if any(issue.severity == "erro" for issue in issues) else 0
+
+
+def _sync_lattes(config: AppConfig, csv_path: Path, xml_path: Path | None) -> int:
+    source_xml = xml_path or config.root / str(config.lattes["export_xml"])
+    records = mark_registered(read_records(csv_path), source_xml)
+    write_records(records, csv_path)
+    registered_count = sum(record.registered_in_lattes for record in records)
+    logger.info(
+        "{} de {} registros marcados como cadastrados.",
+        registered_count,
+        len(records),
+    )
+    return 0
 
 
 async def _fill(config: AppConfig, path: Path, row: int) -> int:
@@ -97,6 +121,8 @@ def main() -> int:
             return asyncio.run(_collect(config, args.advisor, args.output))
         if args.command == "validate":
             return _validate(args.csv)
+        if args.command == "sync-lattes":
+            return _sync_lattes(config, args.csv, args.xml)
         if args.command == "fill":
             return asyncio.run(_fill(config, args.csv, args.row))
     except (KeyboardInterrupt, EOFError):

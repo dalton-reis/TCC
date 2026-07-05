@@ -32,6 +32,9 @@ lattes-automation collect --advisor "Dalton Solano dos Reis"
 # Validar o arquivo depois da revisão manual
 lattes-automation validate data/exported/tccs.csv
 
+# Atualizar a coluna cadastrado usando o XML do Lattes
+lattes-automation sync-lattes data/exported/tccs.csv
+
 # Preencher a primeira linha de dados revisada (sem salvar)
 lattes-automation fill data/exported/tccs.csv --row 1
 ```
