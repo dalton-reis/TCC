@@ -11,7 +11,7 @@ from loguru import logger
 from .browser import browser_context
 from .collector import BibliotecaCollector
 from .config import AppConfig, load_config
-from .csv_service import read_records, write_records
+from .csv_service import read_records, sort_records, write_records
 from .lattes import LattesAssistant
 from .lattes_xml import mark_registered
 from .logging import configure_logging
@@ -63,6 +63,7 @@ async def _collect(config: AppConfig, advisor: str, output: Path | None) -> int:
         logger.info("{} registros já cadastrados no Lattes.", registered_count)
     else:
         logger.warning("XML do Lattes não encontrado em {}.", xml_path)
+    records = sort_records(records)
     destination = output or config.paths["exported"] / "tccs.csv"
     count = write_records(records, destination)
     logger.info("{} registros gravados em {}.", count, destination)

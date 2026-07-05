@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from lattes_automation.csv_service import read_records, write_records
+from lattes_automation.csv_service import read_records, sort_records, write_records
 from lattes_automation.models import TccRecord
 
 
@@ -22,3 +22,17 @@ def test_csv_round_trip(tmp_path: Path) -> None:
         "nome_aluno;titulo;ano;curso;instituicao;tipo_trabalho;orientador;"
         "url_origem;revisado;cadastrado"
     )
+
+
+def test_sort_records_by_year_then_student_name() -> None:
+    records = [
+        TccRecord(student_name="Zélia", title="C", year=2024),
+        TccRecord(student_name="Álvaro", title="B", year=2024),
+        TccRecord(student_name="Carlos", title="A", year=2023),
+    ]
+    result = sort_records(records)
+    assert [(record.year, record.student_name) for record in result] == [
+        (2023, "Carlos"),
+        (2024, "Álvaro"),
+        (2024, "Zélia"),
+    ]

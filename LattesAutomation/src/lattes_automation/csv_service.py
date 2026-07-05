@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import unicodedata
 from collections.abc import Iterable
 from pathlib import Path
 
@@ -20,6 +21,16 @@ CSV_COLUMNS = {
     "reviewed": "revisado",
     "registered_in_lattes": "cadastrado",
 }
+
+
+def sort_records(records: Iterable[TccRecord]) -> list[TccRecord]:
+    """Ordena por ano e nome do aluno, ignorando caixa e acentuação."""
+
+    def normalized_name(record: TccRecord) -> str:
+        value = unicodedata.normalize("NFKD", record.student_name)
+        return value.encode("ascii", "ignore").decode().casefold()
+
+    return sorted(records, key=lambda record: (record.year, normalized_name(record)))
 
 
 def _csv_row(record: TccRecord) -> dict[str, str | int]:
