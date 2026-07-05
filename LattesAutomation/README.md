@@ -36,7 +36,9 @@ lattes-automation validate data/exported/tccs.csv
 lattes-automation fill data/exported/tccs.csv --row 1
 ```
 
-No CSV, altere `reviewed` para `true` somente após conferir o registro.
+No CSV, altere `revisado` para `true` somente após conferir o registro.
+A coluna `cadastrado` é atualizada pela comparação com o XML configurado em
+`lattes.export_xml`. Registros já cadastrados são bloqueados pelo comando `fill`.
 Novas coletas sobrescrevem `data/exported/tccs.csv`, permitindo que o Git
 registre somente as diferenças entre as versões sucessivas dos dados.
 

@@ -13,6 +13,7 @@ from .collector import BibliotecaCollector
 from .config import AppConfig, load_config
 from .csv_service import read_records, write_records
 from .lattes import LattesAssistant
+from .lattes_xml import mark_registered
 from .logging import configure_logging
 from .validation import validate_records
 
@@ -44,6 +45,13 @@ def build_parser() -> argparse.ArgumentParser:
 async def _collect(config: AppConfig, advisor: str, output: Path | None) -> int:
     async with browser_context(config.browser) as context:
         records = await BibliotecaCollector(context, config).collect(advisor)
+    xml_path = config.root / str(config.lattes["export_xml"])
+    if xml_path.exists():
+        records = mark_registered(records, xml_path)
+        registered_count = sum(record.registered_in_lattes for record in records)
+        logger.info("{} registros já cadastrados no Lattes.", registered_count)
+    else:
+        logger.warning("XML do Lattes não encontrado em {}.", xml_path)
     destination = output or config.paths["exported"] / "tccs.csv"
     count = write_records(records, destination)
     logger.info("{} registros gravados em {}.", count, destination)
@@ -63,11 +71,18 @@ async def _fill(config: AppConfig, path: Path, row: int) -> int:
     records = read_records(path)
     if row < 1 or row > len(records):
         raise ValueError(f"Linha deve estar entre 1 e {len(records)}.")
+    xml_path = config.root / str(config.lattes["export_xml"])
+    if not xml_path.exists():
+        raise FileNotFoundError(f"XML do Lattes não encontrado em {xml_path}.")
+    records = mark_registered(records, xml_path)
+    record = records[row - 1]
+    if record.registered_in_lattes:
+        raise ValueError("O trabalho selecionado já está cadastrado no Lattes.")
     async with browser_context(config.browser) as context:
         assistant = LattesAssistant(context, config)
         page = await assistant.open()
         input("Após login e abertura do formulário, pressione Enter...")
-        await assistant.fill_record(page, records[row - 1])
+        await assistant.fill_record(page, record)
         input("Revise no navegador. Pressione Enter para encerrar sem salvar...")
     return 0
 

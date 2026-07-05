@@ -18,6 +18,7 @@ class TccRecord:
     advisor: str = ""
     source_url: str = ""
     reviewed: bool = False
+    registered_in_lattes: bool = False
 
     def __post_init__(self) -> None:
         """Normaliza strings e rejeita registros obviamente inválidos."""
@@ -61,4 +62,6 @@ class TccRecord:
             advisor=row.get("advisor", ""),
             source_url=row.get("source_url", ""),
             reviewed=row.get("reviewed", "").strip().lower() in {"1", "true", "sim", "yes"},
+            registered_in_lattes=row.get("registered_in_lattes", "").strip().lower()
+            in {"1", "true", "sim", "yes"},
         )

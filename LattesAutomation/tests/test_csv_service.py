@@ -13,6 +13,12 @@ def test_csv_round_trip(tmp_path: Path) -> None:
         title="Um TCC",
         year=2025,
         reviewed=True,
+        registered_in_lattes=True,
     )
     assert write_records([original], path) == 1
     assert read_records(path) == [original]
+    header = path.read_text(encoding="utf-8-sig").splitlines()[0]
+    assert header == (
+        "nome_aluno;titulo;ano;curso;instituicao;tipo_trabalho;orientador;"
+        "url_origem;revisado;cadastrado"
+    )

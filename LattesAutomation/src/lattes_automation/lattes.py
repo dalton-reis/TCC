@@ -34,6 +34,8 @@ class LattesAssistant:
             raise SafetyViolation(
                 "O registro precisa estar marcado como revisado no CSV."
             )
+        if record.registered_in_lattes:
+            raise SafetyViolation("O trabalho já está cadastrado no Lattes.")
         values = {
             "student_name": record.student_name,
             "title": record.title,

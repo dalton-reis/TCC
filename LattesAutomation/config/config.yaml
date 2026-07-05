@@ -10,6 +10,7 @@ biblioteca:
 
 lattes:
   url: "https://wwws.cnpq.br/cvlattesweb/"
+  export_xml: "data/exported/4744915461420609.xml"
 
 paths:
   raw: "data/raw"
