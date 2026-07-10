@@ -8,6 +8,8 @@ src/lattes_automation/config.py
 src/lattes_automation/csv_service.py
 src/lattes_automation/extraction.py
 src/lattes_automation/lattes.py
+src/lattes_automation/lattes_import.py
+src/lattes_automation/lattes_xml.py
 src/lattes_automation/logging.py
 src/lattes_automation/main.py
 src/lattes_automation/models.py
@@ -19,6 +21,9 @@ src/lattesautomation.egg-info/dependency_links.txt
 src/lattesautomation.egg-info/entry_points.txt
 src/lattesautomation.egg-info/requires.txt
 src/lattesautomation.egg-info/top_level.txt
+tests/test_collector.py
 tests/test_csv_service.py
 tests/test_extraction.py
+tests/test_lattes_import.py
+tests/test_lattes_xml.py
 tests/test_validation.py
