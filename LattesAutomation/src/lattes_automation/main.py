@@ -136,6 +136,7 @@ async def _fill(config: AppConfig, path: Path, row: int) -> int:
         assistant = LattesAssistant(context, config)
         page = await assistant.open()
         input("Após login e abertura do formulário, pressione Enter...")
+        page = assistant.current_form_page(page)
         await assistant.fill_record(page, record)
         input("Revise no navegador. Pressione Enter para encerrar sem salvar...")
     return 0

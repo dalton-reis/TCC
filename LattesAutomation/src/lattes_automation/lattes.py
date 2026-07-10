@@ -28,6 +28,19 @@ class LattesAssistant:
         logger.info("Lattes aberto. Faça login e navegue até o formulário desejado.")
         return page
 
+    def current_form_page(self, fallback: Page) -> Page:
+        """Retorna a aba do Lattes onde o formulário foi aberto manualmente."""
+        pages = [page for page in self._context.pages if not page.is_closed()]
+        for candidate in reversed(pages):
+            if "cvlattesweb" in candidate.url:
+                logger.info("Usando aba do Lattes: {}", candidate.url)
+                return candidate
+        logger.warning(
+            "Nenhuma aba cvlattesweb foi encontrada; usando a aba inicial: {}",
+            fallback.url,
+        )
+        return fallback
+
     async def fill_record(self, page: Page, record: TccRecord) -> None:
         """Preenche campos, mas nunca localiza nem aciona o botão Salvar."""
         if not record.reviewed:
