@@ -13,6 +13,7 @@ from .collector import BibliotecaCollector
 from .config import AppConfig, load_config
 from .csv_service import read_records, sort_records, write_records
 from .lattes import LattesAssistant
+from .lattes_import import generate_import_xml
 from .lattes_xml import mark_registered
 from .logging import configure_logging
 from .validation import validate_records
@@ -46,6 +47,15 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="XML exportado do Lattes; usa lattes.export_xml quando omitido.",
     )
+
+    import_lattes = commands.add_parser(
+        "import-lattes",
+        help="Gera um XML para importação manual de uma linha no Lattes.",
+    )
+    import_lattes.add_argument("csv", type=Path)
+    import_lattes.add_argument("--row", type=int, required=True)
+    import_lattes.add_argument("--xml", type=Path, help="XML-base exportado do Lattes.")
+    import_lattes.add_argument("--output", type=Path, help="Arquivo XML de saída.")
 
     fill = commands.add_parser("fill", help="Preenche um registro revisado no Lattes.")
     fill.add_argument("csv", type=Path)
@@ -92,6 +102,25 @@ def _sync_lattes(config: AppConfig, csv_path: Path, xml_path: Path | None) -> in
     return 0
 
 
+def _import_lattes(
+    config: AppConfig,
+    csv_path: Path,
+    row: int,
+    xml_path: Path | None,
+    output: Path | None,
+) -> int:
+    records = read_records(csv_path)
+    if row < 1 or row > len(records):
+        raise ValueError(f"Linha deve estar entre 1 e {len(records)}.")
+    source_xml = xml_path or config.root / str(config.lattes["export_xml"])
+    records = mark_registered(records, source_xml)
+    destination = output or config.root / str(config.lattes["import_xml"])
+    generated = generate_import_xml(records[row - 1], source_xml, destination)
+    logger.info("XML para importação manual gerado em {}.", generated)
+    logger.warning("Confira o XML e importe-o manualmente no Lattes.")
+    return 0
+
+
 async def _fill(config: AppConfig, path: Path, row: int) -> int:
     records = read_records(path)
     if row < 1 or row > len(records):
@@ -124,6 +153,14 @@ def main() -> int:
             return _validate(args.csv)
         if args.command == "sync-lattes":
             return _sync_lattes(config, args.csv, args.xml)
+        if args.command == "import-lattes":
+            return _import_lattes(
+                config,
+                args.csv,
+                args.row,
+                args.xml,
+                args.output,
+            )
         if args.command == "fill":
             return asyncio.run(_fill(config, args.csv, args.row))
     except (KeyboardInterrupt, EOFError):
